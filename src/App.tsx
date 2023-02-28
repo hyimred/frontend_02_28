@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Link, Navigate, Route, Routes } from 'react-router-dom';
+import Main from './components/pages/Main';
+import Product from './components/pages/Product';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+class App extends React.Component {
+
+  render() {
+    return <div>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <Link to='/'>Főoldal</Link>
+            </li>
+            <li>
+              <Link to='/about'>About</Link>
+            </li>
+          </ul>
+        </nav>
       </header>
+      <main>
+        <Routes>
+          <Route path='/' element={<Main/>} />
+          <Route path='/about' element={<p>Elérhetőségek, rólunk stb.</p>} />
+          <Route path='/products/:productId' element={<Product/>} />
+          <Route path='/*' element={<Navigate to='/'/>}/>
+        </Routes>
+      </main>
     </div>
-  );
+  }
 }
 
 export default App;
